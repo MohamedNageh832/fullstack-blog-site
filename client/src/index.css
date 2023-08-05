@@ -1,0 +1,111 @@
+:root {
+  --green: #198754;
+  --green-hover: #157347;
+  --blue: #0d6efd;
+  --blue-hover: #0b5ed7;
+  --red: #dc3545;
+  --red-hover: #bb2d3b;
+  --cyan: #0dcaf0;
+  --cyan-hover: #31d2f2;
+  --yellow: #ffc107;
+  --yellow-hover: #ffca2c;
+  --indigo: #6610f2;
+  --teal: #20c997;
+  --teal-hover: #21b689;
+  --secondary: #e2e8f0;
+  --secondary-hover: #dadce0;
+  --black: #131313;
+  --black-hover: #313131;
+  --body-bg-color: #f1f5f9;
+  --main-bg-color: #ffffff;
+  --main-color: #131313;
+  --secondary-color: #617086;
+  --footer-bg-color: #dcdcdc;
+  --footer-color: #333333;
+  --hairline: #dadce0;
+  --hairline-hover: #333333;
+  /* Component Colors */
+  --form-title-color: #64748b;
+  /* Some more properties */
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--main-bg-color);
+  color: var(--main-color);
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.container--full-height {
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+}
+
+.container--center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form__title {
+  color: var(--form-title-color);
+}
+
+.form__input {
+  border: none;
+  border-bottom: 1px solid var(--hairline);
+}/*# sourceMappingURL=index.css.map */

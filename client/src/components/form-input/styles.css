@@ -1,0 +1,16 @@
+.form-input {
+  padding: 8px;
+  font-size: inherit;
+  border: none;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.form-input:hover,
+.form-input:focus-visible,
+.form-input:focus {
+  border-color: var(--hairline-hover);
+}
+
+.form-input:focus-visible {
+  outline: none;
+}/*# sourceMappingURL=styles.css.map */

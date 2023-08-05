@@ -1,0 +1,14 @@
+.recommended-blogs {
+  width: 30%;
+}
+
+.recommended-blogs__heading {
+  margin-bottom: 24px;
+  font-size: 20px;
+}
+
+.recommended-blogs__posts {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}

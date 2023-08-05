@@ -1,0 +1,27 @@
+.footer {
+  padding: 16px;
+  margin-top: 100px;
+  background-color: var(--footer-bg-color);
+  color: var(--footer-color);
+}
+
+.footer__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer__logo {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--green);
+}
+
+.footer__logo:hover,
+.footer__logo:focus {
+  color: var(--green);
+}
+
+.footer__small {
+  font-size: 14px;
+}

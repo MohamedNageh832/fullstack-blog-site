@@ -1,0 +1,9 @@
+.form-radio {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.form-radio__label {
+  cursor: pointer;
+}/*# sourceMappingURL=styles.css.map */

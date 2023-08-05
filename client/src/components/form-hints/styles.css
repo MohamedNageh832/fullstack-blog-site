@@ -1,0 +1,28 @@
+.form__hints-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.form__hint-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-secondary, #64748b);
+}
+
+.form__hint-item.active {
+  color: var(--green);
+}
+
+.hint-item__icon {
+  font-size: 16px;
+}
+
+.hint-item__message {
+  font-size: 12px;
+  font-weight: 500;
+}/*# sourceMappingURL=styles.css.map */

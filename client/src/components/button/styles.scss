@@ -1,0 +1,112 @@
+.btn {
+  --text-color: #000000;
+  --bg-color: #f1f5f9;
+  --border-color: #f1f5f9;
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 5px;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  transition: background-color 0.15s ease-in-out;
+  font-weight: inherit;
+  cursor: pointer;
+}
+
+.btn:focus,
+.btn:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 4px rgba(var(--btn-focus-shadow-rgb), 0.5);
+}
+
+// Variants
+.btn--sharp-outline,
+.btn--sharp {
+  border-radius: 0;
+}
+
+.btn--sharp-outline,
+.btn--outline {
+  background-color: transparent;
+  border: 1px solid var(--bg-color);
+  color: var(--bg-color);
+}
+
+.btn--sharp-outline:hover,
+.btn--sharp-outline:focus,
+.btn--outline:hover,
+.btn--outline:focus {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+// Colors
+.btn--black,
+.btn--red,
+.btn--green {
+  --text-color: #ffffff;
+}
+
+.btn--secondary,
+.btn--cyan,
+.btn--yellow,
+.btn--teal {
+  --text-color: #333333;
+}
+
+.btn--green {
+  --btn-focus-shadow-rgb: 60, 153, 110;
+  --bg-color: var(--green);
+}
+
+.btn--green:hover {
+  --bg-color: var(--green-hover);
+}
+
+.btn--teal {
+  --bg-color: var(--teal);
+}
+
+.btn--teal:hover {
+  --bg-color: var(--teal-hover);
+}
+
+.btn--red {
+  --bg-color: var(--red);
+}
+
+.btn--red:hover {
+  --bg-color: var(--red-hover);
+}
+
+.btn--yellow {
+  --bg-color: var(--yellow);
+}
+
+.btn--yellow:hover {
+  --bg-color: var(--yellow-hover);
+}
+
+.btn--cyan {
+  --bg-color: var(--cyan);
+}
+
+.btn--cyan:hover {
+  --bg-color: var(--cyan-hover);
+}
+
+.btn--secondary {
+  --bg-color: var(--secondary);
+}
+
+.btn--secondary:hover {
+  --bg-color: var(--secondary-hover);
+}
+
+.btn--black {
+  --bg-color: var(--black);
+}
+
+.btn--black:hover {
+  --bg-color: var(--black-hover);
+}
