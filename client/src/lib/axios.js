@@ -1,5 +1,9 @@
 import axios from "axios";
 
-axios.create({
-  proxy: "http://localhost:5173/",
+export const axiosPublic = axios.create({
+  baseURL: "http://localhost:8080/api",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  withCredentials: true,
 });

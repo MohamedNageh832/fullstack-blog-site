@@ -2,7 +2,11 @@
   --text-color: #000000;
   --bg-color: #f1f5f9;
   --border-color: #f1f5f9;
-  display: inline-block;
+  --loader-color: var(--blue);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   padding: 8px 16px;
   border-radius: 5px;
   color: var(--text-color);
@@ -17,6 +21,10 @@
 .btn:focus-visible {
   outline: 0;
   box-shadow: 0 0 0 4px rgba(var(--btn-focus-shadow-rgb), 0.5);
+}
+
+.btn--is-pending {
+  opacity: 0.5;
 }
 
 // Variants
@@ -45,6 +53,7 @@
 .btn--red,
 .btn--green {
   --text-color: #ffffff;
+  --loader-color: #ffffff;
 }
 
 .btn--secondary,
@@ -109,4 +118,26 @@
 
 .btn--black:hover {
   --bg-color: var(--black-hover);
+}
+
+// Btn loader
+.btn__loader {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-width: 1;
+  border-style: solid;
+  border-color: var(--loader-color) transparent;
+  border-radius: 50%;
+  animation: btnLoader 1s linear infinite forwards;
+}
+
+@keyframes btnLoader {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }

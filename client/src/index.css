@@ -16,8 +16,8 @@
   --secondary-hover: #dadce0;
   --black: #131313;
   --black-hover: #313131;
-  --body-bg-color: #f1f5f9;
   --main-bg-color: #ffffff;
+  --secondary-bg-color: #f1f5f9;
   --main-color: #131313;
   --secondary-color: #617086;
   --footer-bg-color: #f1f5f9;
@@ -108,4 +108,8 @@ img {
 .form__input {
   border: none;
   border-bottom: 1px solid var(--hairline);
+}
+
+.bg--secondary {
+  background-color: var(--secondary-bg-color);
 }/*# sourceMappingURL=index.css.map */

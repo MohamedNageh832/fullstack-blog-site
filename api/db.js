@@ -1,12 +1,16 @@
-const mysql = require("mysql");
+import mysql from "mysql2";
 
 export const db = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "Admin@1234",
-  database: "Blog db",
+  database: "blog",
 });
 
 db.connect((err) => {
-  console.log("Database connected");
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("Database connected");
+  }
 });

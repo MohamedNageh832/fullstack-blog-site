@@ -41,7 +41,7 @@ const Navbar = () => {
           ))}
 
           <span className="navbar__user">Ultra</span>
-          <span>Logout</span>
+          <Link to="/auth/login">Logout</Link>
           <Link to="/blogs/create">
             <Button color="green" variant="outline">
               Create Blog

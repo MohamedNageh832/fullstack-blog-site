@@ -9,6 +9,10 @@ interface HintInterface {
 type Value = string | number;
 type Hints = Array<HintInterface>;
 
+interface ErrorMessageInterface {
+  message: string;
+}
+
 interface FormInputInterface {
   id?: string;
   name?: string;
@@ -18,7 +22,7 @@ interface FormInputInterface {
   label?: string;
   placeholder?: string;
   hints?: Hints;
-  errorMessage: string;
+  errorMessage: ErrorMessageInterface;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   onFocus?: (e: ChangeEvent<HTMLInputElement>) => void;
   required?: boolean;

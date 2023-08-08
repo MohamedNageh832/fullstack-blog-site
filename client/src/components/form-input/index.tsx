@@ -16,7 +16,7 @@ const FormInput = (props: FormInputInterface) => {
     placeholder,
     className,
     hints,
-    errorMessage,
+    errorMessage, // must be in the form of {message: string}
     onChange,
     onFocus,
     required,
@@ -27,18 +27,26 @@ const FormInput = (props: FormInputInterface) => {
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  console.log(errorMessage);
+
   useEffect(() => {
     setError(errorMessage);
   }, [errorMessage]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    for (let i = 0; i < hintsArray.length; i++) {
-      hintsArray[i].valid = hintsArray[i].validate(
-        (e.target as HTMLInputElement).value
-      );
+    if (hintsArray) {
+      for (let i = 0; i < hintsArray.length; i++) {
+        if (!hintsArray[i].validate) continue;
 
-      setHintsArray([...hintsArray]);
+        hintsArray[i].valid = hintsArray[i].validate(
+          (e.target as HTMLInputElement).value
+        );
+
+        setHintsArray([...hintsArray]);
+      }
     }
+
+    setError(null);
 
     if (onChange) onChange(e);
   };
@@ -61,7 +69,7 @@ const FormInput = (props: FormInputInterface) => {
     ...(value && { value }),
     type,
     ref: inputRef,
-    className: "form-input",
+    className: `form-input${errorMessage ? " form-input--error" : ""}`,
     placeholder, // TODO: change to make placeholder transform into label onclick or just hide on click
     onChange: handleChange,
     onBlur: handleBlur,
@@ -75,12 +83,12 @@ const FormInput = (props: FormInputInterface) => {
   };
 
   return (
-    <FormGroup className={className}>
+    <FormGroup className={`${className ? ` ${className}` : ""}`}>
       {label && <Label {...labelProps}>{label}</Label>}
       <input {...inputProps} />
 
       {hints && isFocused && <FormHints hintsArray={hintsArray} />}
-      {error && <FormErrorMessage>{error}</FormErrorMessage>}
+      {error && <FormErrorMessage>{error.message}</FormErrorMessage>}
     </FormGroup>
   );
 };

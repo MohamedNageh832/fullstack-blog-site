@@ -14,6 +14,7 @@ interface ButtonInterface {
   color?: Color;
   variant?: Variant;
   className?: string;
+  isPending: boolean;
   children?: ReactNode;
   onClick?: (e: MouseEvent<HTMLElement>) => void;
 }

@@ -12,6 +12,7 @@ import {
   BlogPostDetailsPage,
 } from "./pages";
 import { MainLayout } from "./layouts";
+import { AuthProvider } from "./features/auth";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -35,7 +36,9 @@ const router = createBrowserRouter(
 function App() {
   return (
     <div className="app">
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </div>
   );
 }

@@ -1,67 +1,124 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
-
-import { Button, Form, FormInput } from "../../../../components";
+import { Link, useNavigate } from "react-router-dom";
+import { safeParse, set } from "valibot";
+import {
+  Button,
+  Form,
+  FormErrorMessage,
+  FormInput,
+} from "../../../../components";
 import { emailAddressHints, passwordHints } from "./hints";
 import "./styles.css";
+import { registerSchema } from "./schemas";
+import { axiosPublic } from "../../../../lib/axios";
 
 const usernameInputProps = {
   name: "username",
   type: "text",
-  placeholder: "Username",
-  className: "form__input",
+  label: "Username",
 };
 
 const emailInputProps = {
-  name: "emailAddress",
+  name: "email",
   type: "email",
-  placeholder: "Email address",
-  className: "form__input",
+  label: "Email address",
   hints: emailAddressHints,
 };
 
 const passwordInputProps = {
   name: "password",
   type: "password",
-  placeholder: "Password",
-  className: "form__input",
+  label: "Password",
   hints: passwordHints,
 };
 
+const repeatPasswordInputProps = {
+  name: "repeatPassword",
+  type: "password",
+  label: "Repeat password",
+};
+
 const RegisterForm = () => {
-  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  const [isPending, setIsPending] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const handleSubmit = async (values) => {
-    const valuesArray = Object.values(values);
+    setIsPending(true);
+    setErrors({});
 
-    for (let i = 0; i < valuesArray; i++) {
-      const value = valuesArray[i];
+    const { password, repeatPassword } = values;
 
-      if (value.trim() === "") return setError("Please fill all fields");
+    const result = safeParse(registerSchema, values);
+
+    if (!result.success) {
+      const { issues } = result.error;
+
+      issues.forEach((issue) => {
+        const { message, path } = issue;
+
+        setErrors((prev) => ({ ...prev, [path[0].key]: { message } }));
+      });
+    } else {
+      if (password !== repeatPassword) {
+        setErrors((prev) => ({
+          ...prev,
+          repeatPassword: { message: `Passwords don't match` },
+        }));
+      } else {
+        try {
+          const { repeatPassword, ...otherValues } = values;
+          const result = await axiosPublic.post("/auth/register", otherValues);
+          const { success } = result.response.data;
+
+          console.log(result.response, success);
+          navigate("/auth/login");
+        } catch (err) {
+          const { message } = err.response.data;
+          setErrors((prev) => ({ ...prev, formError: { message } }));
+          console.log(err);
+        }
+      }
     }
 
-    try {
-      const result = await axios.post();
-
-      console.log(result);
-    } catch (err) {
-      console.log(err);
-    }
+    setIsPending(false);
   };
+
+  console.log(errors);
 
   return (
     <Form className="register-form" onSubmit={handleSubmit}>
-      {error && <p>{error}</p>}
       <h2 className="form__title">Register</h2>
+      {errors.formError && (
+        <FormErrorMessage>{errors.formError.message}</FormErrorMessage>
+      )}
 
-      <FormInput {...usernameInputProps} />
+      <FormInput
+        {...usernameInputProps}
+        errorMessage={errors[usernameInputProps.name]}
+      />
 
-      <FormInput {...emailInputProps} />
+      <FormInput
+        {...emailInputProps}
+        errorMessage={errors[emailInputProps.name]}
+      />
 
-      <FormInput {...passwordInputProps} />
+      <FormInput
+        {...passwordInputProps}
+        errorMessage={errors[passwordInputProps.name]}
+      />
 
-      <Button className="register-form__submit" color="green" variant="sharp">
+      <FormInput
+        {...repeatPasswordInputProps}
+        errorMessage={errors[repeatPasswordInputProps.name]}
+      />
+
+      <Button
+        className="register-form__submit"
+        color="green"
+        variant="sharp"
+        isPending={isPending}
+      >
         Register
       </Button>
 

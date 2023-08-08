@@ -1,10 +1,16 @@
 .form-error {
   display: flex;
+  align-items: center;
   gap: 8px;
+  margin-top: 8px;
+  color: var(--red);
   font-size: 14px;
 }
 
+.form-error__icon {
+  font-size: 18px;
+}
+
 .form-error__message {
-  color: var(--red);
   font-weight: 500;
 }

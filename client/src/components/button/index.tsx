@@ -6,6 +6,7 @@ const Button = (props: ButtonInterface) => {
     className,
     color,
     variant = "normal",
+    isPending,
     children,
     onClick,
   } = props || {};
@@ -13,11 +14,16 @@ const Button = (props: ButtonInterface) => {
   const btnProps = {
     className: `btn btn--${color} btn--${variant}${
       className ? ` ${className}` : ""
-    }`,
+    }${isPending ? " btn--is-pending" : ""}`,
     onClick,
   };
 
-  return <button {...btnProps}>{children}</button>;
+  return (
+    <button {...btnProps}>
+      {children}
+      {isPending && <span className="btn__loader"></span>}
+    </button>
+  );
 };
 
 export default Button;

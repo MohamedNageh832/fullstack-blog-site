@@ -1,10 +1,21 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Button, Form, FormInput } from "../../../../components";
+import { axiosPublic } from "../../../../lib/axios";
+import {
+  Button,
+  Form,
+  FormErrorMessage,
+  FormInput,
+} from "../../../../components";
+import { useAuth } from "../../context";
 import "./styles.css";
 
 const LoginForm = () => {
+  const { login } = useAuth();
+  const [errors, setErrors] = useState({});
+
   const emailInputProps = {
-    name: "emailAddress",
+    name: "email",
     type: "email",
     label: "Email address",
   };
@@ -15,13 +26,55 @@ const LoginForm = () => {
     label: "Password",
   };
 
+  const handleSubmit = async (values) => {
+    setErrors({});
+    const { email, password } = values;
+
+    if (email === "") {
+      setErrors((prev) => ({
+        ...prev,
+        email: { message: "This field can't be empty" },
+      }));
+    } else if (password === "") {
+      setErrors((prev) => ({
+        ...prev,
+        password: { message: "This field can't be empty" },
+      }));
+    } else {
+      try {
+        const result = await axiosPublic.post("/auth/login", values);
+
+        console.log(result);
+      } catch (err) {
+        if (err.response) {
+          const { message } = err.response.data;
+          setErrors((prev) => ({ ...prev, formError: { message } }));
+        } else {
+          console.log(err);
+        }
+      }
+    }
+  };
+
+  console.log(errors);
+
   return (
-    <Form className="login-form">
+    <Form className="login-form" onSubmit={handleSubmit}>
       <h2 className="form__title">Login</h2>
 
-      <FormInput {...emailInputProps} />
+      {errors.formError && (
+        <FormErrorMessage>{errors.formError.message}</FormErrorMessage>
+      )}
 
-      <FormInput {...passwordInputProps} />
+      <FormInput
+        {...emailInputProps}
+        errorMessage={errors[emailInputProps.name]}
+      />
+
+      <FormInput
+        {...passwordInputProps}
+        errorMessage={errors[passwordInputProps.name]}
+      />
 
       <Button color="green" variant="sharp">
         Submit

@@ -5,6 +5,10 @@
   border-bottom: 1px solid var(--hairline);
 }
 
+.form-input--error {
+  border-color: var(--red);
+}
+
 .form-input:hover,
 .form-input:focus-visible,
 .form-input:focus {
