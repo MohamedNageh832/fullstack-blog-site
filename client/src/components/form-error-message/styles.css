@@ -1,0 +1,10 @@
+.form-error {
+  display: flex;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.form-error__message {
+  color: var(--red);
+  font-weight: 500;
+}/*# sourceMappingURL=styles.css.map */

@@ -1,9 +1,10 @@
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import "./styles.css";
 import FormHints from "../form-hints";
 import Label from "../label";
 import FormGroup from "../form-group";
 import { FormInputInterface } from "./types";
+import FormErrorMessage from "../form-error-message";
 
 const FormInput = (props: FormInputInterface) => {
   const {
@@ -15,14 +16,20 @@ const FormInput = (props: FormInputInterface) => {
     placeholder,
     className,
     hints,
+    errorMessage,
     onChange,
     onFocus,
     required,
     onBlur,
   } = props || {};
+  const [error, setError] = useState(errorMessage);
   const [hintsArray, setHintsArray] = useState(hints);
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    setError(errorMessage);
+  }, [errorMessage]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     for (let i = 0; i < hintsArray.length; i++) {
@@ -73,6 +80,7 @@ const FormInput = (props: FormInputInterface) => {
       <input {...inputProps} />
 
       {hints && isFocused && <FormHints hintsArray={hintsArray} />}
+      {error && <FormErrorMessage>{error}</FormErrorMessage>}
     </FormGroup>
   );
 };

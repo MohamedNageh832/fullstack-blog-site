@@ -18,6 +18,7 @@ interface FormInputInterface {
   label?: string;
   placeholder?: string;
   hints?: Hints;
+  errorMessage: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   onFocus?: (e: ChangeEvent<HTMLInputElement>) => void;
   required?: boolean;

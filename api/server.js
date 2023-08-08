@@ -1,12 +1,15 @@
-const express = require("express");
+import express from "express";
+import cookieParser from "cookie-parser";
+
+import authRoutes from "./routes/auth";
+
 const app = express();
 
 app.use(express.json());
+app.use(cookieParser());
 
-app.listen(3000, () => {
-  console.log(`Listening at port: 3000`);
+app.listen(8080, () => {
+  console.log(`Listening at port: 8080`);
 });
 
-app.post("/auth/register", () => {});
-
-app.get("/", (req, res) => res.json({ message: "hi" }));
+app.post("/api/auth", authRoutes);
